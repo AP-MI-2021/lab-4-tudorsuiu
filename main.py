@@ -18,6 +18,7 @@ def is_found(lst: List[int], find_this: int, position: int) -> bool:
     Determina daca un numar citit de la tastatura se afla in lista pe pozitia citita del a tastatura
     :param lst: lista care contine numere intregi
     :param find_this: numarul intreg care trebuie gasit
+    :param position: pozitia de unde se incepe cautarea lui find_this
     :return:
     """
     for i in range(position, len(lst)):
@@ -59,6 +60,26 @@ def test_sum_of_all_even():
 
 
 # OPTIUNEA 4 \/ \/ \/
+def find_all_even_from_list(lst: List[int]) -> List[int]:
+    """
+    Determina toate elementele pare dintr-o lista
+    :param lst: lista care contine numere intregi
+    :return: o lista care contine toate numerele pare gasite in lst, fara ca
+             acestea sa se repete
+    """
+    result = []
+    for number_from_list in lst:
+        if number_from_list % 2 == 0 and is_found(result, number_from_list, 0) is False:
+            result.append(number_from_list)
+    return result
+
+
+def test_find_all_even_from_list():
+    assert find_all_even_from_list([23, 12, 3, 52, 12]) == [12, 52]
+    assert find_all_even_from_list([12, 3, 12, 12, 7, 12, 3, 3]) == [12]
+    assert find_all_even_from_list([]) == []
+    assert find_all_even_from_list([2, 32, 122, 12, 1456]) == [2, 32, 122, 12, 1456]
+
 # OPTIUNEA 4 /\ /\ /\
 
 
@@ -72,7 +93,9 @@ def print_menu():
           "se regaseste un lista incepand de la o anumita pozitie citita de la"
           "tastatura.")
     print("3. Determina si afiseaza suma tuturor numerelor intregi pare din lista.")
-    print("4. !NU UITA SA MODIFICI!")
+    print("4. Determina si afiseaza toate numerele din lista care sunt pare. Daca "
+          "se repeta un numar, acesta va aparea in lista razultat doar o singura "
+          "data.")
     print("5. !NU UITA SA MODIFICI!")
     print("A. Afisare lista")
     print("6. Iesire")
@@ -96,7 +119,7 @@ def main():
         elif optiune == "3":
             print(sum_of_all_even(lst))
         elif optiune == "4":
-            pass
+            print(find_all_even_from_list(lst))
         elif optiune == "5":
             pass
         elif optiune == "A":
@@ -110,4 +133,5 @@ def main():
 if __name__ == "__main__":
     test_is_found()
     test_sum_of_all_even()
+    test_find_all_even_from_list()
     main()
