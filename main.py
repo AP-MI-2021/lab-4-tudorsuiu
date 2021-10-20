@@ -36,6 +36,25 @@ def test_is_found():
 
 
 # OPTIUNEA 3 \/ \/ \/
+def sum_of_all_even(lst: List[int]) -> int:
+    """
+    Determina suma tuturor numerelor intregi pare din lista
+    :param lst: lista care contine numere intregi
+    :return: suma tuturor numerelor intregi pare din lista
+    """
+    total = 0
+    for number_from_list in lst:
+        if number_from_list % 2 == 0:
+            total = total + number_from_list
+    return total
+
+
+def test_sum_of_all_even():
+    assert sum_of_all_even([2, 3, 122, 12, 1456]) == 1592
+    assert sum_of_all_even([0]) == 0
+    assert sum_of_all_even([2, 3, 12, 5, 9]) == 14
+    assert sum_of_all_even([23, 13, 3, 57, 19]) == 0
+
 # OPTIUNEA 3 /\ /\ /\
 
 
@@ -52,7 +71,7 @@ def print_menu():
     print("2. Determina si afiseaza daca un numar citit de la tastatura"
           "se regaseste un lista incepand de la o anumita pozitie citita de la"
           "tastatura.")
-    print("3. !NU UITA SA MODIFICI!")
+    print("3. Determina si afiseaza suma tuturor numerelor intregi pare din lista.")
     print("4. !NU UITA SA MODIFICI!")
     print("5. !NU UITA SA MODIFICI!")
     print("A. Afisare lista")
@@ -75,7 +94,7 @@ def main():
             else:
                 print("NU")
         elif optiune == "3":
-            pass
+            print(sum_of_all_even(lst))
         elif optiune == "4":
             pass
         elif optiune == "5":
@@ -90,4 +109,5 @@ def main():
 
 if __name__ == "__main__":
     test_is_found()
+    test_sum_of_all_even()
     main()
