@@ -130,12 +130,12 @@ def test_replace_with_sum_of_elements():
 
 def print_menu():
     print("1. Citire lista.")
-    print("2. Determina si afiseaza daca un numar citit de la tastatura"
+    print("2. Determina si afiseaza daca un numar citit de la tastatura "
           "se regaseste un lista incepand de la o anumita pozitie citita de la"
           "tastatura.")
     print("3. Determina si afiseaza suma tuturor numerelor intregi pare din lista.")
     print("4. Determina si afiseaza toate numerele din lista care sunt pare. Daca "
-          "se repeta un numar, acesta va aparea in lista razultat doar o singura "
+          "se repeta un numar, acesta va aparea in lista rezultat doar o singura "
           "data.")
     print("5. Determina si afiseaza lista obtinuta prin inlocuirea fiecarui numar "
           "cu un tuplu format din doua numere de pe pozitii distincte din lista "
