@@ -55,7 +55,6 @@ def test_sum_of_all_even():
     assert sum_of_all_even([0]) == 0
     assert sum_of_all_even([2, 3, 12, 5, 9]) == 14
     assert sum_of_all_even([23, 13, 3, 57, 19]) == 0
-
 # OPTIUNEA 3 /\ /\ /\
 
 
@@ -84,6 +83,48 @@ def test_find_all_even_from_list():
 
 
 # OPTIUNEA 5 \/ \/ \/
+def tuple_element_is_a_sum_of_elements(lst: List[int], element: int) -> tuple:
+    """
+    Determina daca un element dat poate se poate obtine prin adunarea oricaror
+    doua elemente din lista
+    :param lst:
+    :param element:
+    :return: tupla cu cele doua elemente din lista care adunate au ca rezultat
+             elementul dat, tupla goala in caz contrar
+    """
+    for st in range(len(lst)):
+        for dr in range(len(lst)):
+            if st != dr and element == lst[st] + lst[dr] and lst[st] != element and lst[dr] != element:
+                return lst[st], lst[dr]
+    return ()
+
+
+def test_tuple_element_is_a_sum_of_elements():
+    assert tuple_element_is_a_sum_of_elements([4, 8, 6, 3, 2, 1], 3) == (2, 1)
+    assert tuple_element_is_a_sum_of_elements([4, 8, 6, 3, 2, 1], 4) == (3, 1)
+    assert tuple_element_is_a_sum_of_elements([4, 8, 6, 3, 2, 1], 8) == (6, 2)
+    assert tuple_element_is_a_sum_of_elements([4, 8, 6, 3, 2, 1], 6) == (4, 2)
+    assert tuple_element_is_a_sum_of_elements([1, 2, 3, 4, 5, 6, 7], 15) == ()
+
+
+def replace_with_sum_of_elements(lst: List[int]) -> List[int]:
+    """
+    Determina daca elementele din lista pot fi scrise ca suma de doua valori
+    preluate din lista
+    :param lst: lista care contine numere intregi
+    :return: lista formata din tupluri si numere intregi
+    """
+    result = lst[:]
+    for i in range(len(lst)):
+        if tuple_element_is_a_sum_of_elements(lst, lst[i]) != ():
+            result[i] = tuple_element_is_a_sum_of_elements(lst, lst[i])
+    return result
+
+
+def test_replace_with_sum_of_elements():
+    assert replace_with_sum_of_elements([4, 8, 6, 3, 2, 1]) == [(3, 1), (6, 2), (4, 2), (2, 1), 2, 1]
+    assert replace_with_sum_of_elements([1, 2, 3, 4, 5]) == [1, 2, (1, 2), (1, 3), (1, 4)]
+    assert replace_with_sum_of_elements([21, 30, 42, 53, 0, 123]) == [21, 30, 42, 53, 0, 123]
 # OPTIUNEA 5 /\ /\ /\
 
 
@@ -96,7 +137,9 @@ def print_menu():
     print("4. Determina si afiseaza toate numerele din lista care sunt pare. Daca "
           "se repeta un numar, acesta va aparea in lista razultat doar o singura "
           "data.")
-    print("5. !NU UITA SA MODIFICI!")
+    print("5. Determina si afiseaza lista obtinuta prin inlocuirea fiecarui numar "
+          "cu un tuplu format din doua numere de pe pozitii distincte din lista "
+          "care adunate dau acel numar, daca se poate.")
     print("A. Afisare lista")
     print("6. Iesire")
 
@@ -121,7 +164,7 @@ def main():
         elif optiune == "4":
             print(find_all_even_from_list(lst))
         elif optiune == "5":
-            pass
+            print(replace_with_sum_of_elements(lst))
         elif optiune == "A":
             print(lst)
         elif optiune == "6":
@@ -134,4 +177,6 @@ if __name__ == "__main__":
     test_is_found()
     test_sum_of_all_even()
     test_find_all_even_from_list()
+    test_tuple_element_is_a_sum_of_elements()
+    test_replace_with_sum_of_elements()
     main()
